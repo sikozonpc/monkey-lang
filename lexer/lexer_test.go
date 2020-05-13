@@ -6,7 +6,7 @@ import (
 )
 
 func TestNextToken(t *testing.T) {
-	input := `=(){},;`
+	input := `=+(){},;`
 
 	tests := []token.Token{
 		{token.ASSIGN, "="},
@@ -26,13 +26,12 @@ func TestNextToken(t *testing.T) {
 		tok := l.NextToken()
 
 		if tok.Type != tt.Type {
-			f.Fatalf("tests[%d] - token type wrong. expected=%q, got=%q", i, tt.Type, tok.Tye)
+			t.Fatalf("tests[%d] - token type wrong. expected=%q, got=%q", i, tt.Type, tok.Type)
 		}
 
-		if tok.Literal != tt.expectedLiteral {
-			t.Fatalf("tests[%d] - literal wrong. expected=%q, got=%q",
-				i, tt.expectedLiteral, tok.Literal)
+		if tok.Literal != tt.Literal {
+			t.Fatalf("tests[%d] - literal wrong. expected=%q, got=%q", i, tt.Literal, tok.Literal)
 		}
 
 	}
-}.
+}
