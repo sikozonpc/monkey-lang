@@ -1,11 +1,11 @@
 package token
 
-// Type : Represents the type of a token literal
+// Type represents the type of a token literal
 //        for performance take it could be an int
-//        but for debuging reasons is betters
+//        but for debuging reasons is better as a string
 type Type string
 
-// Token : Represents the structure of a token by the lexer
+// Token represents the structure of a token by the lexer
 type Token struct {
 	Type    Type
 	Literal string
@@ -18,14 +18,21 @@ const (
 	ILLEGAL = "ILLEGAL" // ilegal character
 	EOF     = "EOF"
 
+	// Identifiers + literals
 	IDENT = "IDENT" // add, foobar, x, y...
 	INT   = "INT"   // 42
 
-	// Identifiers + literals
-	ASSIGN = "="
-	PLUS   = "+"
-
 	// Operators
+	ASSIGN   = "="
+	PLUS     = "+"
+	MINUS    = "-"
+	BANG     = "!"
+	ASTERISK = "*"
+	SLASH    = "/"
+	LT       = "<"
+	GT       = ">"
+
+	// Separators
 	COMMA     = ","
 	SEMICOLON = ";"
 
@@ -39,3 +46,18 @@ const (
 	FUNCTION = "FUNCTION"
 	LET      = "LET"
 )
+
+var keywords = map[string]Type{
+	"fn":  FUNCTION,
+	"let": LET,
+}
+
+// LookupIdent checks the keywords table to see whether the given identifier is in fact a keyword.
+// If it is, it returns the keyword’s TokenType constant. If it isn’t, we just get back token.IDENT,
+// which is the TokenType for all user-defined identifiers.
+func LookupIdent(ident string) Type {
+	if tok, ok := keywords[ident]; ok {
+		return tok
+	}
+	return IDENT
+}
