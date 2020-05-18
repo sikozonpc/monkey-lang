@@ -1,7 +1,6 @@
 package lexer
 
 import (
-	"log"
 	"monkeylang/token"
 )
 
@@ -129,7 +128,6 @@ func (l *Lexer) readIdentifier() string {
 }
 
 func isLetter(ch byte) bool {
-	log.Println(string(ch))
 	return 'a' <= ch && ch <= 'z' || 'A' <= ch && ch <= 'Z' || ch == '_'
 }
 
