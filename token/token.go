@@ -32,6 +32,9 @@ const (
 	LT       = "<"
 	GT       = ">"
 
+	EQ     = "=="
+	NOT_EQ = "!="
+
 	// Separators
 	COMMA     = ","
 	SEMICOLON = ";"
@@ -45,11 +48,21 @@ const (
 	// Keywords
 	FUNCTION = "FUNCTION"
 	LET      = "LET"
+	TRUE     = "TRUE"
+	FALSE    = "FALSE"
+	IF       = "IF"
+	ELSE     = "ELSE"
+	RETURN   = "RETURN"
 )
 
 var keywords = map[string]Type{
-	"fn":  FUNCTION,
-	"let": LET,
+	"fn":     FUNCTION,
+	"let":    LET,
+	"true":   TRUE,
+	"false":  FALSE,
+	"if":     IF,
+	"else":   ELSE,
+	"return": RETURN,
 }
 
 // LookupIdent checks the keywords table to see whether the given identifier is in fact a keyword.
